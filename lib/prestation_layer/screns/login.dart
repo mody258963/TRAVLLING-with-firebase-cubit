@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               label: Padding(
-                padding: EdgeInsets.only(right: width * 0.24),
+                padding: EdgeInsets.only(right: width * 0.22),
                 child: Text("Continue with Email",
                     style: TextStyle(color: MyColors.white)),
               )),
@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               label: Padding(
-                padding: EdgeInsets.only(right: width * 0.15),
+                padding: EdgeInsets.only(right: width * 0.11),
                 child: Text("Continue with Facebook"),
               )),
         ),
@@ -85,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               label: Padding(
-                padding: EdgeInsets.only(right: width * 0.22),
+                padding: EdgeInsets.only(right: width * 0.17),
                 child: Text("Continue with Gmail"),
               )),
         ),
@@ -110,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               label: Padding(
-                padding: EdgeInsets.only(right: width * 0.22),
+                padding: EdgeInsets.only(right: width * 0.17),
                 child: Text("Continue with Apple"),
               )),
         ),
@@ -166,7 +166,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _TextunderthetextFieild() {
-    return Text("We'll call as soon as possible by a message or a call.");
+     double width = MediaQuery.of(context).size.width;
+    double hight = MediaQuery.of(context).size.height;
+    return Container(width: width * 0.90, child: Text("We'll call as soon as possible by a message or a call."));
   }
 
   String _EgyptionFlage() {
@@ -251,7 +253,7 @@ class _LoginScreenState extends State<LoginScreen> {
               image: DecorationImage(
                 image: AssetImage(
                     'assets/fonts/image/photo-1517950908067-2d4181c93e31.jpg'),
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
             child: Center(

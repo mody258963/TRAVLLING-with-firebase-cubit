@@ -69,12 +69,17 @@ Widget _Pincodetextfield(){
     double hight = MediaQuery.of(context).size.height;
     return Column(
       children: [
-        Padding(
-          padding:  EdgeInsets.only(left:  width * 0.05),
-          child: Text(
-            "Verify your phone number",
-            style: TextStyle(fontWeight: FontWeight.bold,fontSize: width * 0.08,color: MyColors.white),
-          ),
+        Row(
+          children: [
+            SizedBox(width: width * 0.05,),
+            Container(
+              width: width *0.90,
+              child: Text(
+                "Verify your phone number",
+                style: TextStyle(fontWeight: FontWeight.bold,fontSize: width * 0.08,color: MyColors.white),
+              ),
+            ),
+          ],
         ),
         Padding(
           padding:  EdgeInsets.only(left:width * 0.05,right: width * 0.05 ),
@@ -97,7 +102,7 @@ Widget _Pincodetextfield(){
             image: DecorationImage(
               image: AssetImage(
                   'assets/fonts/image/photo-1517950908067-2d4181c93e31.jpg'),
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
           child: Column(
