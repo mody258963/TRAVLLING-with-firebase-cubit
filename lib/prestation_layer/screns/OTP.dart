@@ -1,15 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:traelling_app/bessnes_logic/phone_auth/cubit/phone_auth_cubit.dart';
 import 'package:traelling_app/costanse/colors.dart';
+import 'package:traelling_app/costanse/pages.dart';
+import 'package:traelling_app/prestation_layer/screns/login.dart';
 
 class OPTverify extends StatefulWidget {
-  const OPTverify({super.key});
+  const OPTverify({super.key, this.phoneNumber});
+  final phoneNumber;
 
   @override
   State<OPTverify> createState() => _OPTverifyState();
 }
 
+String? otpCode;
+Widget _buildPhoneNumberSumbit() {
+  return BlocListener<PhoneAuthCubit, PhoneAuthState>(
+    listenWhen: (previous, current) {
+      return previous != current;
+    },
+    listener: (BuildContext context, PhoneAuthState state) {
+      if (state is Loading) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return Container(
+              child: Text('fuck you'),
+            );
+          },
+        );
+      }
+      if (state is PhoneOTPVerified) {
+        Navigator.pop(context);
+        Navigator.of(context).pushReplacementNamed(posters);
+      }
+    },
+    child: Container(),
+  );
+}
+
 class _OPTverifyState extends State<OPTverify> {
+  Future<void> _login(BuildContext context) {
+    return BlocProvider.of<PhoneAuthCubit>(context).submitOPT(otpCode!);
+  }
+
   Widget _verfybutton() {
     double width = MediaQuery.of(context).size.width;
     double hight = MediaQuery.of(context).size.height;
@@ -18,7 +53,7 @@ class _OPTverifyState extends State<OPTverify> {
       width: width * 0.90,
       child: ElevatedButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('/OPT');
+          _login(context);
         },
         child: Text('Verify', style: TextStyle(fontSize: 20)),
         style: ElevatedButton.styleFrom(
@@ -56,8 +91,8 @@ class _OPTverifyState extends State<OPTverify> {
         animationDuration: Duration(milliseconds: 300),
         backgroundColor: Colors.transparent,
         enableActiveFill: true,
-        onCompleted: (v) {
-          print("Completed");
+        onCompleted: (code) {
+          otpCode = code;
         },
         onChanged: (value) {
           print(value);
@@ -99,7 +134,7 @@ class _OPTverifyState extends State<OPTverify> {
         Padding(
           padding: EdgeInsets.only(left: width * 0.05, right: width * 0.05),
           child: Text(
-            "Enter your 6 digit code numbers sent to you at ##number##",
+            "Enter your 6 digit code numbers sent to you at $phoneNumber",
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: width * 0.04,

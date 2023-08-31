@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:traelling_app/bessnes_logic/phone_auth/cubit/phone_auth_cubit.dart';
 import 'package:traelling_app/costanse/colors.dart';
-import 'package:traelling_app/prestation_layer/screns/OTP.dart';
+import 'package:traelling_app/costanse/pages.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -9,7 +13,68 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
+TextEditingController _controller = TextEditingController();
+String phoneNumber = _controller.text;
+bool push = false;
+
 class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+  void _Circelindecator(BuildContext context) {
+    AlertDialog alertDialog = AlertDialog(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      content: Center(
+        child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+        ),
+      ),
+    );
+    showDialog(
+        context: context,
+        barrierColor: Colors.white.withOpacity(0),
+        barrierDismissible: false,
+        builder: (context) {
+          return alertDialog;
+        });
+  }
+
+  Future<void> _regester(BuildContext context) async {
+    if (!_formKey.currentState!.validate()) {
+      Navigator.pop(context);
+    } else {
+      Navigator.pop(context);
+      _formKey.currentState!.save();
+      BlocProvider.of<PhoneAuthCubit>(context).sumbitPhoneNumbr(phoneNumber);
+    }
+  }
+
+  Widget _buildPhoneNumberSumbit() {
+    return BlocListener<PhoneAuthCubit, PhoneAuthState>(
+      listenWhen: (previous, current) {
+        return previous != current;
+      },
+      listener: (BuildContext context, PhoneAuthState state) {
+        if (state is Loading) {
+          _Circelindecator(context);
+        }
+        if (state is PhonwNumberSumbited) {
+          Navigator.pop(context);
+          Navigator.of(context).pushNamed(Optpage, arguments: phoneNumber);
+        }
+        if (state is ErrorOccurred) {
+          String erromasg = (state).errorMsg;
+          print("===================================== $erromasg");
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(erromasg),
+            backgroundColor: Colors.black,
+            duration: Duration(seconds: 6),
+          ));
+        }
+      },
+      child: Container(),
+    );
+  }
+
   Widget _SocialMediaButtons() {
     double width = MediaQuery.of(context).size.width;
     double hight = MediaQuery.of(context).size.height;
@@ -154,7 +219,11 @@ class _LoginScreenState extends State<LoginScreen> {
       width: width * 0.90,
       child: ElevatedButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('/OPT');
+          print(
+              '===================================================$phoneNumber');
+          _Circelindecator(context);
+
+          _regester(context);
         },
         child: Text('Continue', style: TextStyle(fontSize: 20)),
         style: ElevatedButton.styleFrom(
@@ -166,9 +235,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _TextunderthetextFieild() {
-     double width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
     double hight = MediaQuery.of(context).size.height;
-    return Container(width: width * 0.90, child: Text("We'll call as soon as possible by a message or a call."));
+    return Container(
+        width: width * 0.90,
+        child: Text("We'll call as soon as possible by a message or a call."));
   }
 
   String _EgyptionFlage() {
@@ -210,6 +281,12 @@ class _LoginScreenState extends State<LoginScreen> {
             height: hight * 0.075,
             width: width * 0.90,
             child: TextFormField(
+              validator: (value) {
+                if (value!.length < 11 || value.length > 11) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
               decoration: InputDecoration(
                 filled: true,
                 fillColor: MyColors.white,
@@ -235,6 +312,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               cursorHeight: 25,
               keyboardType: TextInputType.phone,
+              controller: _controller,
             ))
       ],
     );
@@ -242,6 +320,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    void dispose() {
+      super.dispose();
+      _controller.dispose();
+    }
+
     double width = MediaQuery.of(context).size.width;
     double hight = MediaQuery.of(context).size.height;
     return MaterialApp(
@@ -257,32 +340,36 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             child: Center(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: hight * 0.05,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: width * 0.047,
-                      bottom: hight * 0.04,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: hight * 0.05,
                     ),
-                    child: Text("Login or Create an account",
-                        style: TextStyle(
-                            fontSize: width * 0.08, color: MyColors.white)),
-                  ),
-                  _TextFieldEg(),
-                  SizedBox(
-                    height: hight * 0.01,
-                  ),
-                  _TextunderthetextFieild(),
-                  SizedBox(
-                    height: hight * 0.03,
-                  ),
-                  _buttonofconfirmation(),
-                  _lineoftheOR(),
-                  _SocialMediaButtons()
-                ],
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: width * 0.047,
+                        bottom: hight * 0.04,
+                      ),
+                      child: Text("Login or Create an account",
+                          style: TextStyle(
+                              fontSize: width * 0.08, color: MyColors.white)),
+                    ),
+                    _TextFieldEg(),
+                    SizedBox(
+                      height: hight * 0.01,
+                    ),
+                    _TextunderthetextFieild(),
+                    SizedBox(
+                      height: hight * 0.03,
+                    ),
+                    _buttonofconfirmation(),
+                    _lineoftheOR(),
+                    _SocialMediaButtons(),
+                    _buildPhoneNumberSumbit()
+                  ],
+                ),
               ),
             ),
           ),
