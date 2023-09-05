@@ -15,37 +15,64 @@ class OPTverify extends StatefulWidget {
 }
 
 String? otpCode;
-Widget _buildPhoneNumberSumbit() {
-  return BlocListener<PhoneAuthCubit, PhoneAuthState>(
-    listenWhen: (previous, current) {
-      return previous != current;
-    },
-    listener: (BuildContext context, PhoneAuthState state) {
-      if (state is Loading) {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return Container(
-              child: Text('fuck you'),
-            );
-          },
-        );
-      }
-      if (state is PhoneOTPVerified) {
-        Navigator.pop(context);
-        Navigator.of(context).pushReplacementNamed(posters);
-      }
-    },
-    child: Container(),
-  );
-}
 
 class _OPTverifyState extends State<OPTverify> {
-  Future<void> _login(BuildContext context) {
-    return BlocProvider.of<PhoneAuthCubit>(context).submitOPT(otpCode!);
+  void _Circelindecator(BuildContext context) {
+    AlertDialog alertDialog = AlertDialog(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      content: Center(
+        child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+        ),
+      ),
+    );
+    showDialog(
+        context: context,
+        barrierColor: Colors.white.withOpacity(0),
+        barrierDismissible: false,
+        builder: (context) {
+          return alertDialog;
+        });
   }
 
-  Widget _verfybutton() {
+  Widget _buildPhoneNumberSumbit() {
+    return BlocListener<PhoneAuthCubit, PhoneAuthState>(
+      listenWhen: (previous, current) {
+        return previous != current;
+      },
+      listener: (BuildContext context, PhoneAuthState state) {
+        if (state is Loading) {
+          _Circelindecator(context);
+        }
+        if (state is PhoneOTPVerified) {
+          print('=======================================bagad');
+          Navigator.pop(context);
+          Navigator.of(
+            context,
+            rootNavigator: true,
+          ).pushReplacementNamed(posters);
+        }
+        if (state is ErrorOccurred) {
+          String erromasg = (state).errorMsg;
+          print("===================================== $erromasg");
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(erromasg),
+            backgroundColor: Colors.black,
+            duration: Duration(seconds: 6),
+          ));
+        }
+      },
+      child: Container(),
+    );
+  }
+
+  Future<void> _login(BuildContext context) async {
+    Navigator.pop(context);
+    BlocProvider.of<PhoneAuthCubit>(context).submitOPT(otpCode!);
+  }
+
+  Widget _verfybutton(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double hight = MediaQuery.of(context).size.height;
     return Container(
@@ -53,6 +80,7 @@ class _OPTverifyState extends State<OPTverify> {
       width: width * 0.90,
       child: ElevatedButton(
         onPressed: () {
+          _Circelindecator(context);
           _login(context);
         },
         child: Text('Verify', style: TextStyle(fontSize: 20)),
@@ -64,7 +92,7 @@ class _OPTverifyState extends State<OPTverify> {
     );
   }
 
-  Widget _Pincodetextfield() {
+  Widget _Pincodetextfield(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double hight = MediaQuery.of(context).size.height;
     return Container(
@@ -93,16 +121,10 @@ class _OPTverifyState extends State<OPTverify> {
         enableActiveFill: true,
         onCompleted: (code) {
           otpCode = code;
+          print('==============================completed');
         },
         onChanged: (value) {
           print(value);
-          setState(() {});
-        },
-        beforeTextPaste: (text) {
-          print("Allowing to paste $text");
-          //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-          //but you can show anything you want here, like your pop up saying wrong paste format or etc
-          return true;
         },
         appContext: context,
       ),
@@ -170,11 +192,11 @@ class _OPTverifyState extends State<OPTverify> {
               SizedBox(
                 height: hight * 0.05,
               ),
-              _Pincodetextfield(),
+              _Pincodetextfield(context),
               SizedBox(
                 height: hight * 0.09,
               ),
-              _verfybutton()
+              _verfybutton(context)
             ],
           ),
         ),

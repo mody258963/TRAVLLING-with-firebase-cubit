@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '917925633182',
     projectId: 'travling-app-28d94',
     authDomain: 'travling-app-28d94.firebaseapp.com',
+    databaseURL: 'https://travling-app-28d94-default-rtdb.firebaseio.com',
     storageBucket: 'travling-app-28d94.appspot.com',
     measurementId: 'G-PQYZEGD26H',
   );
@@ -58,6 +59,7 @@ class DefaultFirebaseOptions {
     appId: '1:917925633182:android:fe4659a2ddcbe85121ef8f',
     messagingSenderId: '917925633182',
     projectId: 'travling-app-28d94',
+    databaseURL: 'https://travling-app-28d94-default-rtdb.firebaseio.com',
     storageBucket: 'travling-app-28d94.appspot.com',
   );
 
@@ -66,7 +68,9 @@ class DefaultFirebaseOptions {
     appId: '1:917925633182:ios:009aaa900abbde7721ef8f',
     messagingSenderId: '917925633182',
     projectId: 'travling-app-28d94',
+    databaseURL: 'https://travling-app-28d94-default-rtdb.firebaseio.com',
     storageBucket: 'travling-app-28d94.appspot.com',
+    androidClientId: '917925633182-71tfeps964ki9eiasf9v3fbb1u00rv46.apps.googleusercontent.com',
     iosClientId: '917925633182-ilm7dp48b0omb4kh52utcn4kjaa35658.apps.googleusercontent.com',
     iosBundleId: 'com.example.traellingApp',
   );
@@ -76,7 +80,9 @@ class DefaultFirebaseOptions {
     appId: '1:917925633182:ios:06fd8adb4901a87c21ef8f',
     messagingSenderId: '917925633182',
     projectId: 'travling-app-28d94',
+    databaseURL: 'https://travling-app-28d94-default-rtdb.firebaseio.com',
     storageBucket: 'travling-app-28d94.appspot.com',
+    androidClientId: '917925633182-71tfeps964ki9eiasf9v3fbb1u00rv46.apps.googleusercontent.com',
     iosClientId: '917925633182-0mmqepb4kebkogbrv57rq1imo05apjcn.apps.googleusercontent.com',
     iosBundleId: 'com.example.traellingApp.RunnerTests',
   );

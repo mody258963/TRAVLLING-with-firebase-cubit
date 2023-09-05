@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:traelling_app/bessnes_logic/phone_auth/cubit/phone_auth_cubit.dart';
 import 'package:traelling_app/costanse/colors.dart';
 import 'package:traelling_app/costanse/pages.dart';
+import 'package:traelling_app/prestation_layer/screns/OTP.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -41,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _regester(BuildContext context) async {
     if (!_formKey.currentState!.validate()) {
       Navigator.pop(context);
+      print('====================================her');
     } else {
       Navigator.pop(context);
       _formKey.currentState!.save();
@@ -59,7 +61,8 @@ class _LoginScreenState extends State<LoginScreen> {
         }
         if (state is PhonwNumberSumbited) {
           Navigator.pop(context);
-          Navigator.of(context).pushNamed(Optpage, arguments: phoneNumber);
+          Navigator.of(context, rootNavigator: true)
+              .pushNamed(Optpage, arguments: phoneNumber);
         }
         if (state is ErrorOccurred) {
           String erromasg = (state).errorMsg;
@@ -211,7 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buttonofconfirmation() {
+  Widget _buttonofconfirmation(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double hight = MediaQuery.of(context).size.height;
     return Container(
@@ -364,7 +367,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: hight * 0.03,
                     ),
-                    _buttonofconfirmation(),
+                    _buttonofconfirmation(context),
                     _lineoftheOR(),
                     _SocialMediaButtons(),
                     _buildPhoneNumberSumbit()
