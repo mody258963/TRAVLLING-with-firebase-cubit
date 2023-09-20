@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -44,7 +43,7 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
 
   Future<void> submitOPT(String otpcode) async {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: this.verificationId, smsCode: otpcode);
+        verificationId: verificationId, smsCode: otpcode);
     await signIn(credential);
   }
 

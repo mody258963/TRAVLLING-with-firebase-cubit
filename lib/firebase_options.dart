@@ -70,8 +70,10 @@ class DefaultFirebaseOptions {
     projectId: 'travling-app-28d94',
     databaseURL: 'https://travling-app-28d94-default-rtdb.firebaseio.com',
     storageBucket: 'travling-app-28d94.appspot.com',
-    androidClientId: '917925633182-71tfeps964ki9eiasf9v3fbb1u00rv46.apps.googleusercontent.com',
-    iosClientId: '917925633182-ilm7dp48b0omb4kh52utcn4kjaa35658.apps.googleusercontent.com',
+    androidClientId:
+        '917925633182-71tfeps964ki9eiasf9v3fbb1u00rv46.apps.googleusercontent.com',
+    iosClientId:
+        '917925633182-ilm7dp48b0omb4kh52utcn4kjaa35658.apps.googleusercontent.com',
     iosBundleId: 'com.example.traellingApp',
   );
 
@@ -82,8 +84,10 @@ class DefaultFirebaseOptions {
     projectId: 'travling-app-28d94',
     databaseURL: 'https://travling-app-28d94-default-rtdb.firebaseio.com',
     storageBucket: 'travling-app-28d94.appspot.com',
-    androidClientId: '917925633182-71tfeps964ki9eiasf9v3fbb1u00rv46.apps.googleusercontent.com',
-    iosClientId: '917925633182-0mmqepb4kebkogbrv57rq1imo05apjcn.apps.googleusercontent.com',
+    androidClientId:
+        '917925633182-71tfeps964ki9eiasf9v3fbb1u00rv46.apps.googleusercontent.com',
+    iosClientId:
+        '917925633182-0mmqepb4kebkogbrv57rq1imo05apjcn.apps.googleusercontent.com',
     iosBundleId: 'com.example.traellingApp.RunnerTests',
   );
 }

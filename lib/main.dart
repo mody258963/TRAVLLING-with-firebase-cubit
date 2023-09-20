@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:traelling_app/costanse/pages.dart';
-import 'package:traelling_app/prestation_layer/screns/login.dart';
 import 'package:traelling_app/prestation_layer/widgets/app_router.dart';
 
 import 'firebase_options.dart';
@@ -15,7 +14,7 @@ void main() async {
   FirebaseAuth.instance.authStateChanges().listen(
     (event) {
       if (event == null) {
-        initialRoute = logain;
+        initialRoute = addingPage;
       } else {
         initialRoute = posters;
       }

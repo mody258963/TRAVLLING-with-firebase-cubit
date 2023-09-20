@@ -10,7 +10,7 @@ class PosterDetals extends StatefulWidget {
 class _PosterDetalsState extends State<PosterDetals> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Text("45645646"),
     );
   }

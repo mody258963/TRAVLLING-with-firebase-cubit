@@ -1,9 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:traelling_app/costanse/colors.dart';
-import 'package:traelling_app/prestation_layer/widgets/globle.dart';
 
 class Posters extends StatefulWidget {
   const Posters({super.key});
@@ -12,10 +10,9 @@ class Posters extends StatefulWidget {
   State<Posters> createState() => _PostersState();
 }
 
-Query dreamA = FirebaseDatabase.instance.ref().child('post');
-Query dreamB = FirebaseDatabase.instance.ref().child('post').child('photos');
-
 class _PostersState extends State<Posters> {
+  Query dreamB = FirebaseDatabase.instance.ref().child('post');
+
   Widget contanerImage() {
     double width = MediaQuery.of(context).size.width;
     double hight = MediaQuery.of(context).size.height;
@@ -27,7 +24,7 @@ class _PostersState extends State<Posters> {
         decoration: BoxDecoration(
             border: Border.all(color: MyColors.black),
             color: MyColors.white,
-            borderRadius: BorderRadius.all(Radius.circular(9))),
+            borderRadius: const BorderRadius.all(Radius.circular(9))),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(9),
           child: FirebaseAnimatedList(
@@ -65,19 +62,10 @@ class _PostersState extends State<Posters> {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
-            title: Text("order page "),
+            title: const Text("order page "),
           ),
-          body: SizedBox(
-            height: double.infinity,
-            child: FirebaseAnimatedList(
-              query: dreamA,
-              itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                  Animation<double> animation, int index) {
-                Map smap = snapshot.value as Map;
-                smap['key'] = snapshot.key;
-                return Myproducts(smap: smap);
-              },
-            ),
+          body: const Column(
+            children: [],
           )),
     );
   }

@@ -1,11 +1,9 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:traelling_app/bessnes_logic/phone_auth/cubit/phone_auth_cubit.dart';
 import 'package:traelling_app/costanse/colors.dart';
 import 'package:traelling_app/costanse/pages.dart';
-import 'package:traelling_app/prestation_layer/screns/OTP.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -21,7 +19,7 @@ bool push = false;
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   void _Circelindecator(BuildContext context) {
-    AlertDialog alertDialog = AlertDialog(
+    AlertDialog alertDialog = const AlertDialog(
       backgroundColor: Colors.transparent,
       elevation: 0,
       content: Center(
@@ -70,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(erromasg),
             backgroundColor: Colors.black,
-            duration: Duration(seconds: 6),
+            duration: const Duration(seconds: 6),
           ));
         }
       },
@@ -83,13 +81,13 @@ class _LoginScreenState extends State<LoginScreen> {
     double hight = MediaQuery.of(context).size.height;
     return Column(
       children: [
-        Container(
+        SizedBox(
           height: hight * 0.065,
           width: width * 0.90,
           child: ElevatedButton.icon(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                  primary: MyColors.whitefade,
+                  backgroundColor: MyColors.whitefade,
                   padding: EdgeInsets.zero,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(9))),
@@ -97,89 +95,89 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: EdgeInsets.only(
                   right: width * 0.18,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.email_outlined,
                 ),
               ),
               label: Padding(
                 padding: EdgeInsets.only(right: width * 0.22),
-                child: Text("Continue with Email",
+                child: const Text("Continue with Email",
                     style: TextStyle(color: MyColors.white)),
               )),
         ),
         SizedBox(
           height: hight * 0.02,
         ),
-        Container(
+        SizedBox(
           height: hight * 0.065,
           width: width * 0.90,
           child: ElevatedButton.icon(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                  primary: MyColors.whitefade,
+                  backgroundColor: MyColors.whitefade,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(9))),
               icon: Padding(
                 padding: EdgeInsets.only(
                   right: width * 0.18,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.facebook_outlined,
                 ),
               ),
               label: Padding(
                 padding: EdgeInsets.only(right: width * 0.11),
-                child: Text("Continue with Facebook"),
+                child: const Text("Continue with Facebook"),
               )),
         ),
         SizedBox(
           height: hight * 0.02,
         ),
-        Container(
+        SizedBox(
           height: hight * 0.065,
           width: width * 0.90,
           child: ElevatedButton.icon(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                  primary: MyColors.whitefade,
+                  backgroundColor: MyColors.whitefade,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(9))),
               icon: Padding(
                 padding: EdgeInsets.only(
                   right: width * 0.18,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.g_mobiledata,
                 ),
               ),
               label: Padding(
                 padding: EdgeInsets.only(right: width * 0.17),
-                child: Text("Continue with Gmail"),
+                child: const Text("Continue with Gmail"),
               )),
         ),
         SizedBox(
           height: hight * 0.02,
         ),
-        Container(
+        SizedBox(
           height: hight * 0.065,
           width: width * 0.90,
           child: ElevatedButton.icon(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                  primary: MyColors.whitefade,
+                  backgroundColor: MyColors.whitefade,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(9))),
               icon: Padding(
                 padding: EdgeInsets.only(
                   right: width * 0.18,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.apple_outlined,
                 ),
               ),
               label: Padding(
                 padding: EdgeInsets.only(right: width * 0.17),
-                child: Text("Continue with Apple"),
+                child: const Text("Continue with Apple"),
               )),
         ),
       ],
@@ -194,15 +192,15 @@ class _LoginScreenState extends State<LoginScreen> {
         SizedBox(
           width: width * 0.06,
         ),
-        Container(
+        SizedBox(
           width: width * 0.41,
-          child: Divider(
+          child: const Divider(
             thickness: 1,
             color: MyColors.gray,
           ),
         ),
-        Text(" or "),
-        Container(
+        const Text(" or "),
+        SizedBox(
           width: width * 0.41,
           child: Divider(
             thickness: 1,
@@ -217,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buttonofconfirmation(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double hight = MediaQuery.of(context).size.height;
-    return Container(
+    return SizedBox(
       height: hight * 0.07,
       width: width * 0.90,
       child: ElevatedButton(
@@ -228,11 +226,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
           _regester(context);
         },
-        child: Text('Continue', style: TextStyle(fontSize: 20)),
         style: ElevatedButton.styleFrom(
-            primary: MyColors.realblack,
+            backgroundColor: MyColors.realblack,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(9))),
+        child: const Text('Continue', style: TextStyle(fontSize: 20)),
       ),
     );
   }
@@ -240,9 +238,9 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _TextunderthetextFieild() {
     double width = MediaQuery.of(context).size.width;
     double hight = MediaQuery.of(context).size.height;
-    return Container(
+    return SizedBox(
         width: width * 0.90,
-        child: Text("We'll call as soon as possible by a message or a call."));
+        child: const Text("We'll call as soon as possible by a message or a call."));
   }
 
   String _EgyptionFlage() {
@@ -274,13 +272,13 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Padding(
             padding: EdgeInsets.only(left: width * 0.02, top: width * 0.031),
             child: Text(
-              _EgyptionFlage() + "   |   Egypt (+20) ",
+              "${_EgyptionFlage()}   |   Egypt (+20) ",
               textAlign: TextAlign.start,
               style: TextStyle(fontSize: width * 0.055),
             ),
           ),
         ),
-        Container(
+        SizedBox(
             height: hight * 0.075,
             width: width * 0.90,
             child: TextFormField(
@@ -338,7 +336,7 @@ class _LoginScreenState extends State<LoginScreen> {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
-                    'assets/fonts/image/photo-1517950908067-2d4181c93e31.jpg'),
+                    'assets/images/photo-1517950908067-2d4181c93e31.jpg'),
                 fit: BoxFit.fill,
               ),
             ),

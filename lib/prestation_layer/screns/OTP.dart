@@ -18,7 +18,7 @@ String? otpCode;
 
 class _OPTverifyState extends State<OPTverify> {
   void _Circelindecator(BuildContext context) {
-    AlertDialog alertDialog = AlertDialog(
+    AlertDialog alertDialog = const AlertDialog(
       backgroundColor: Colors.transparent,
       elevation: 0,
       content: Center(
@@ -59,7 +59,7 @@ class _OPTverifyState extends State<OPTverify> {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(erromasg),
             backgroundColor: Colors.black,
-            duration: Duration(seconds: 6),
+            duration: const Duration(seconds: 6),
           ));
         }
       },
@@ -75,7 +75,7 @@ class _OPTverifyState extends State<OPTverify> {
   Widget _verfybutton(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double hight = MediaQuery.of(context).size.height;
-    return Container(
+    return SizedBox(
       height: hight * 0.07,
       width: width * 0.90,
       child: ElevatedButton(
@@ -83,11 +83,11 @@ class _OPTverifyState extends State<OPTverify> {
           _Circelindecator(context);
           _login(context);
         },
-        child: Text('Verify', style: TextStyle(fontSize: 20)),
         style: ElevatedButton.styleFrom(
-            primary: MyColors.realblack,
+            backgroundColor: MyColors.realblack,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(9))),
+        child: const Text('Verify', style: TextStyle(fontSize: 20)),
       ),
     );
   }
@@ -95,7 +95,7 @@ class _OPTverifyState extends State<OPTverify> {
   Widget _Pincodetextfield(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double hight = MediaQuery.of(context).size.height;
-    return Container(
+    return SizedBox(
       width: width * 0.90,
       child: PinCodeTextField(
         length: 6,
@@ -116,7 +116,7 @@ class _OPTverifyState extends State<OPTverify> {
           activeColor: MyColors.white,
           activeFillColor: Colors.white,
         ),
-        animationDuration: Duration(milliseconds: 300),
+        animationDuration: const Duration(milliseconds: 300),
         backgroundColor: Colors.transparent,
         enableActiveFill: true,
         onCompleted: (code) {
@@ -141,7 +141,7 @@ class _OPTverifyState extends State<OPTverify> {
             SizedBox(
               width: width * 0.05,
             ),
-            Container(
+            SizedBox(
               width: width * 0.90,
               child: Text(
                 "Verify your phone number",
@@ -179,7 +179,7 @@ class _OPTverifyState extends State<OPTverify> {
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
-                  'assets/fonts/image/photo-1517950908067-2d4181c93e31.jpg'),
+                  'assets/images/photo-1517950908067-2d4181c93e31.jpg'),
               fit: BoxFit.fill,
             ),
           ),

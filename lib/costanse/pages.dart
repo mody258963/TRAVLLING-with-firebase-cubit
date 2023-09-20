@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 
 const Optpage = '/OPT';
 const logain = '/';
-const posters = 'Poster';
-const postersDetals = '/Detals';
+const posters = 'POSTERS';
+const postersDetals = '/DETALS';
+const addingPage = '/ADDINGPSGE';
