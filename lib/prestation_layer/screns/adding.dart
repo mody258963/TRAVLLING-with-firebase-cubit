@@ -16,29 +16,25 @@ class Addingpage extends StatefulWidget {
 }
 
 class _AddingpageState extends State<Addingpage> {
+  final ImagePicker _picker = ImagePicker();
+
   final screenCubit = UplodingDataCubit();
-  List<Media> selectedImages = [];
+  final List<File>? _selectedImages = [];
 
   getMultipImage() async {
-    List<Media> pickedImages = [];
-    pickedImages = await ImagePickers.pickerPaths(
-      galleryMode: GalleryMode.image,
-    );
-    setState(() {
-      selectedImages = pickedImages;
-    });
-    print('===============================$selectedImages');
+    var images = await _picker.pickMultiImage();
+    for (var image in images) {
+      setState(() {
+        _selectedImages!.add(File(image.path));
+      });
+    }
+
+    print('===============================$_selectedImages');
   }
 
   Future<void> uploadImages() async {
-    List<File>? imageFiles = [];
-    for (var image in selectedImages) {
-      final filePath =
-          await LecleFlutterAbsolutePath.getAbsolutePath(uri: image.path!);
-      imageFiles.add(File(filePath!));
-    }
     await BlocProvider.of<UplodingDataCubit>(context)
-        .uploadImagesAndSaveUrls(imageFiles);
+        .uploadImagesAndSaveUrls(_selectedImages!);
   }
 
   Widget _Imagepickers() {
@@ -74,7 +70,7 @@ class _AddingpageState extends State<Addingpage> {
         child: ElevatedButton(
             onPressed: () async {
               BlocProvider.of<UplodingDataCubit>(context)
-                  .uploadData({'sooo': "12eeq"});
+                  .uploadData({'sooo': "34523532"});
               uploadImages();
             },
             style: ElevatedButton.styleFrom(
@@ -85,7 +81,7 @@ class _AddingpageState extends State<Addingpage> {
               backgroundColor: Colors.white70,
             ),
             child: const Text(
-              "Add Proberty",
+              "Upload Data ",
             )),
       ),
     );
