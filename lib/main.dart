@@ -14,7 +14,7 @@ void main() async {
   FirebaseAuth.instance.authStateChanges().listen(
     (event) {
       if (event == null) {
-        initialRoute = addingPage;
+        initialRoute = logain;
       } else {
         initialRoute = posters;
       }

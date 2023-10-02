@@ -47,10 +47,9 @@ class _OPTverifyState extends State<OPTverify> {
         }
         if (state is PhoneOTPVerified) {
           print('=======================================bagad');
-          Navigator.pop(context);
+          Navigator.maybePop(context);
           Navigator.of(
             context,
-            rootNavigator: true,
           ).pushReplacementNamed(posters);
         }
         if (state is ErrorOccurred) {
@@ -121,7 +120,7 @@ class _OPTverifyState extends State<OPTverify> {
         enableActiveFill: true,
         onCompleted: (code) {
           otpCode = code;
-          print('==============================completed');
+          print('==============================$otpCode');
         },
         onChanged: (value) {
           print(value);

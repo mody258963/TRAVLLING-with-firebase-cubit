@@ -58,9 +58,9 @@ class _LoginScreenState extends State<LoginScreen> {
           _Circelindecator(context);
         }
         if (state is PhonwNumberSumbited) {
-          Navigator.pop(context);
+          Navigator.maybePop(context);
           Navigator.of(context, rootNavigator: true)
-              .pushNamed(Optpage, arguments: phoneNumber);
+              .pushNamed(Optpage, arguments: phoneNumber,);
         }
         if (state is ErrorOccurred) {
           String erromasg = (state).errorMsg;

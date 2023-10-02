@@ -1,6 +1,9 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:traelling_app/bessnes_logic/phone_auth/cubit/phone_auth_cubit.dart';
+import 'package:traelling_app/bessnes_logic/uploding_data/uploding_data_cubit.dart';
 import 'package:traelling_app/costanse/colors.dart';
 
 class Posters extends StatefulWidget {
@@ -64,8 +67,15 @@ class _PostersState extends State<Posters> {
           appBar: AppBar(
             title: const Text("order page "),
           ),
-          body: const Column(
-            children: [],
+          body: Column(
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    BlocProvider.of<PhoneAuthCubit>(context).logOut();
+                    setState(() {});
+                  },
+                  child: Text('Logout'))
+            ],
           )),
     );
   }

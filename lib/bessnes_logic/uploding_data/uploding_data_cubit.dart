@@ -11,16 +11,17 @@ import 'package:traelling_app/prestation_layer/widgets/globle.dart';
 
 class UplodingDataCubit extends Cubit<UplodingDataState> {
   UplodingDataCubit() : super(UplodingDataInitial());
-  final databaseReference = FirebaseDatabase.instance.ref();
-  final imagedatabase =
-      FirebaseDatabase.instance.ref().child('Alhamdllah').push();
+
+  final databaseReference = FirebaseDatabase.instance.ref().child('post').push().child(
+      '${DateTime.now().day}f${DateTime.now().month}f${DateTime.now().year}');
+
   final List<String> UrlPhotos = [];
   Future<void> uploadData(Map<String, dynamic> data) async {
     emit(Loading());
     try {
       await Firebase.initializeApp();
 
-      await databaseReference.child('post').push().set(data);
+      await databaseReference.child('Info').set(data);
       print("==============================data send");
     } catch (error) {
       print('=========for data =========$error');
@@ -40,7 +41,7 @@ class UplodingDataCubit extends Cubit<UplodingDataState> {
         final imageUrl = await imageRef.getDownloadURL();
         UrlPhotos.add(imageUrl);
       }
-      imagedatabase.set(UrlPhotos);
+      databaseReference.child('images').set(UrlPhotos);
     } catch (error) {
       print('==========for images=========$error');
     }

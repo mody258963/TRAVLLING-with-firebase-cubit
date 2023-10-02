@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
@@ -13,7 +12,7 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
     emit(Loading());
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: '+2$phoneNumber',
-      timeout: const Duration(seconds: 60),
+      timeout: const Duration(seconds: 120),
       verificationCompleted: verificationcomplated,
       verificationFailed: verificationFailed,
       codeSent: codeSent,
@@ -49,10 +48,11 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
 
   Future<void> signIn(PhoneAuthCredential credential) async {
     try {
-      await FirebaseAuth.instance.signInWithCredential(credential);
+      //await FirebaseAuth.instance.signInWithCredential(credential);
       emit(PhoneOTPVerified());
     } catch (error) {
       emit(ErrorOccurred(errorMsg: error.toString()));
+      print('===============$error');
     }
   }
 
