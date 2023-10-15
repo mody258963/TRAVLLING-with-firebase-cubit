@@ -48,7 +48,7 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
 
   Future<void> signIn(PhoneAuthCredential credential) async {
     try {
-      //await FirebaseAuth.instance.signInWithCredential(credential);
+      await FirebaseAuth.instance.signInWithCredential(credential);
       emit(PhoneOTPVerified());
     } catch (error) {
       emit(ErrorOccurred(errorMsg: error.toString()));

@@ -71,8 +71,9 @@ class _PostersState extends State<Posters> {
             children: [
               ElevatedButton(
                   onPressed: () {
-                    BlocProvider.of<PhoneAuthCubit>(context).logOut();
-                    setState(() {});
+                    setState(() {
+                      BlocProvider.of<PhoneAuthCubit>(context).logOut();
+                    });
                   },
                   child: Text('Logout'))
             ],

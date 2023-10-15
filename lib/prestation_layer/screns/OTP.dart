@@ -46,15 +46,13 @@ class _OPTverifyState extends State<OPTverify> {
           _Circelindecator(context);
         }
         if (state is PhoneOTPVerified) {
-          print('=======================================bagad');
-          Navigator.maybePop(context);
-          Navigator.of(
-            context,
-          ).pushReplacementNamed(posters);
+          Navigator.pop(context);
+          Navigator.of(context, rootNavigator: true)
+              .pushReplacementNamed(posters);
         }
         if (state is ErrorOccurred) {
           String erromasg = (state).errorMsg;
-          print("===================================== $erromasg");
+          print("=====================otp page================ $erromasg");
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(erromasg),
             backgroundColor: Colors.black,
@@ -67,7 +65,6 @@ class _OPTverifyState extends State<OPTverify> {
   }
 
   Future<void> _login(BuildContext context) async {
-    Navigator.pop(context);
     BlocProvider.of<PhoneAuthCubit>(context).submitOPT(otpCode!);
   }
 
@@ -195,7 +192,8 @@ class _OPTverifyState extends State<OPTverify> {
               SizedBox(
                 height: hight * 0.09,
               ),
-              _verfybutton(context)
+              _verfybutton(context),
+              _buildPhoneNumberSumbit()
             ],
           ),
         ),
